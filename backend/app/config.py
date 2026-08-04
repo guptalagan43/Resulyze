@@ -24,10 +24,18 @@ class Settings(BaseSettings):
     RERANKER_MODEL_PATH: str = "app/ml/reranker_model/model.pkl"
     SKILL_TAXONOMY_PATH: str = "app/ml/skill_taxonomy/skills.json"
     ENVIRONMENT: str = "development"
+    ALLOWED_ORIGINS: str = "http://localhost:3000,http://localhost:5173"
     RANDOM_SEED: int = 42
     MAX_RESUME_SIZE_MB: int = 10
     AUTO_DELETE_RESUMES_DAYS: int = 30
     UPLOAD_DIR: str = "uploads"
+
+    @property
+    def allowed_origins_list(self) -> list[str]:
+        """Return list of allowed CORS origins."""
+        if not self.ALLOWED_ORIGINS:
+            return ["*"]
+        return [origin.strip() for origin in self.ALLOWED_ORIGINS.split(",") if origin.strip()]
 
     @property
     def upload_path(self) -> Path:
