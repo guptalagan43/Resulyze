@@ -21,10 +21,10 @@ class Settings(BaseSettings):
     MINIO_BUCKET_REPORTS: str = "reports"
     EMBEDDING_MODEL_NAME: str = "all-MiniLM-L6-v2"
     SPACY_MODEL_NAME: str = "en_core_web_sm"
-    RERANKER_MODEL_PATH: str = "app/ml/reranker_model/model.pkl"
+    RERANKER_MODEL_PATH: str = "app/ml/reranker_model/model.json"
     SKILL_TAXONOMY_PATH: str = "app/ml/skill_taxonomy/skills.json"
     ENVIRONMENT: str = "development"
-    ALLOWED_ORIGINS: str = "http://localhost:3000,http://localhost:5173"
+    ALLOWED_ORIGINS: str = "http://localhost:3000,http://localhost:5173,https://resulyze-alpha.vercel.app"
     RANDOM_SEED: int = 42
     MAX_RESUME_SIZE_MB: int = 10
     AUTO_DELETE_RESUMES_DAYS: int = 30

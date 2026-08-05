@@ -16,8 +16,10 @@ class ModelRegistry:
 
     def load_all(self):
         try:
-            import joblib
-            self.reranker = joblib.load(settings.RERANKER_MODEL_PATH)
+            from xgboost import XGBClassifier
+            model = XGBClassifier()
+            model.load_model(settings.RERANKER_MODEL_PATH)
+            self.reranker = model
             logger.info("Reranker model loaded from %s", settings.RERANKER_MODEL_PATH)
         except Exception:
             logger.warning("Reranker model not found at %s — skipping", settings.RERANKER_MODEL_PATH)

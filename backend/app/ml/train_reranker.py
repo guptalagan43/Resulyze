@@ -6,7 +6,7 @@ import os
 import logging
 from pathlib import Path
 import numpy as np
-import joblib
+
 import spacy
 from sentence_transformers import SentenceTransformer
 from xgboost import XGBClassifier
@@ -150,10 +150,10 @@ def main():
     preds = model.predict(X_test)
     print(classification_report(y_test, preds))
 
-    # Save model
+    # Save model in XGBoost native format (version-portable)
     MODEL_DIR.mkdir(parents=True, exist_ok=True)
-    model_path = MODEL_DIR / "model.pkl"
-    joblib.dump(model, model_path)
+    model_path = MODEL_DIR / "model.json"
+    model.get_booster().save_model(str(model_path))
     logger.info(f"Model saved successfully to {model_path}")
 
 
